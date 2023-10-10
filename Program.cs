@@ -1,29 +1,14 @@
 ﻿using BankMetod;
+using System.Data.SqlTypes;
+
+Random random = new Random();
 /*Bank bank1 = new Bank();
 Bank bank2 = new Bank();
 */
-int shetNumber = 3444444;
-string fio = "Мавроди Сергей Пантелеевич";
-float balance = 99999;
-
-Bank[] Schet = new Bank[2];
-Schet[0] = new Bank();
-Schet[1] = new Bank();
-
-int shetNumber2 = 6666;
-string fio2 = "Апрашкин Валерий Мамадзиёвович";
-float balance2 = 55;
-
-Schet[0].otk(shetNumber, fio,balance);
-Schet[1].otk(shetNumber2, fio2, balance2);
 
 
 
 
-for (int i = 0; i < Schet.Length; i++)
-{
-    Schet[i].Out();
-}
 
 string hello1 = @"
                                                                                            
@@ -48,43 +33,127 @@ Console.WriteLine(hello1 + "\nДобро пожаловать в банк МММ
 
 
 
-/*bank1.otk(shetNumber, fio, balance);
-bank1.Out();
-
-bank2.otk(shetNumber2, fio2, balance2);
-bank2.Out();
-
-Console.WriteLine("Пополнить счёт.");
-Console.Write("Введите сумму: ");
-float pmoney = float.Parse(Console.ReadLine());
-bank1.Dob(pmoney);
-bank1.Out();
-
-Console.Write("Снять деньги со счёта.\nВведите сумму: ");
-float smoney = float.Parse(Console.ReadLine());
-bank1.Umen(smoney);
-bank1.Out();
-
-Console.Write("Обаличить счёт полностью.");
-bank1.Obnul();
-bank1.Out();
-
-Console.Write("Перевод с счёта на счёт.\nВведите сумму: ");
-float permpney = float.Parse(Console.ReadLine());
-bank1.Umen(permpney);
-bank2.Dob(pmoney);
-bank1.Out();
-bank2.Out();*/
 
 
-/*while (true)
+
+int shetNumber = 344444;
+string fio = "Мавроди Сергей Пантелеевич";
+float balance = 99999;
+
+int shetNumber2 = 666666;
+string fio2 = "Апрашкин Валерчикс Санчезович";
+float balance2 = 55;
+
+
+Bank[] Schet = new Bank[3];
+Schet[0] = new Bank();
+Schet[1] = new Bank();
+Schet[2] = new Bank();
+
+Console.WriteLine("Запущена процедура создания счёта.");
+Console.Write("Ваше имя: ");
+int shetNumber3 = random.Next(100000, 999999);
+string fio3 = Console.ReadLine();
+float balance3 = 0;
+
+Schet[0].otk(shetNumber, fio,balance);
+Schet[1].otk(shetNumber2, fio2, balance2);
+Schet[2].otk(shetNumber3, fio3, balance3);
+
+
+
+
+
+
+
+Console.WriteLine("Список счетов банка.");
+
+for (int i = 0; i < Schet.Length; i++)
 {
-    Console.WriteLine("Что вы хоите сделать?\n1 - открыть счёт\n2 - показать информацию о счёте\n3 - положить деньги на счёт\n4 - снять со счёта\n5 - Обналичить счёт полностью\n6 - Перевести с одного счёта на другой");
+    Console.Write(i+1 + " - ");
+    Schet[i].Out();
+}
+
+Console.Write("\nВведите айди пользователя для авторизации: ");
+int id = int.Parse(Console.ReadLine())-1;
+
+Console.Clear();
+
+while (true)
+{
+    
+    Console.WriteLine("\n\nЧто вы хоите сделать?\n2 - показать информацию о счёте\n3 - положить деньги на счёт\n4 - снять со счёта\n5 - Обналичить счёт полностью\n6 - Перевести с одного счёта на другой");
     Console.Write("Ввод: ");
-    Console.ReadLine();
+    int what = int.Parse(Console.ReadLine());
 
-   
+    if (what == 2)
+    {
+        Console.Clear();
+        Schet[id].Out();
+        
+    }
 
+    if (what == 3)
+    {
+        Console.Clear();
+        Console.WriteLine("Пополнить счёт.");
+        Console.Write("Введите сумму: ");
+        float money = float.Parse(Console.ReadLine());
+        if (money < 0)
+        {
+            Console.WriteLine("Дружок - пирожок, ты случайно ввёл минус, но я его исправил");
+            money *= -1;
+        }
+        Schet[id].Dob(money);
+    }
+
+    if (what == 4)
+    {
+        Console.Clear();
+        Console.WriteLine("Снять со счёта.");
+        Console.Write("Введите сумму: ");
+        float money = float.Parse(Console.ReadLine());
+        if (money < 0)
+        {
+            Console.WriteLine("Дружок - пирожок, ты случайно ввёл минус, но я его исправил");
+            money *= -1;
+        }
+        Schet[id].Umen(money);
+    }
+
+    if (what == 5)
+    {
+        Console.Clear();
+        Console.WriteLine("Обаличить счёт полностью.");
+        Schet[id].Obnul();
+        Schet[id].Out();
+    }
+
+    if (what == 6)
+    {
+        Console.Clear();
+        for (int i = 0; i < Schet.Length; i++)
+        {
+            Console.Write(i + 1 + " - ");
+            Schet[i].Out();
+        }
+        Console.Write("Перевод с вашего счёта на другой.\nВведите айди счёта на который хотите сделать перевод: ");
+
+        int id2 = int.Parse(Console.ReadLine())-1;
+        Console.Write("Введите сумму: ");
+        float money = float.Parse(Console.ReadLine());
+        if (money < 0)
+        {
+            Console.WriteLine("\nДружок - пирожок, ты случайно ввёл минус, но я его исправил");
+            money *= -1;
+        }
+        Console.WriteLine("\nИнформация о вашем счёте.");
+        Schet[id].Umen(money);
+        Console.WriteLine("\nИнформация для второго счёта.");
+        Schet[id2].Dob(money);
+
+    }
 
 }
-*/
+
+

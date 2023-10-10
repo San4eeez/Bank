@@ -12,8 +12,6 @@ namespace BankMetod
         private string name;
         private float sum;
 
-
-
         public void otk(int nom,string name,float sum)
         {
             this.nom = nom;
@@ -23,19 +21,25 @@ namespace BankMetod
 
         public void Out()
         {
-            Console.WriteLine($"Ваш номер: {nom},Ваше имя: {name}, Сумма: {sum}");
+            Console.WriteLine($"Номер счёта: {nom}. ФИО: {name}.Сумма: {sum}.");
         }
 
         public void Dob(float money)
         {
             Console.WriteLine("Вы успешно добавили на счёт "+money);
             sum += money;
+            Console.WriteLine($"Ваш баланс: {sum}");
         }
 
         public void Umen (float money)
         {
-            Console.WriteLine("Вы успешно сняли со счёта" +money);
+            Console.WriteLine("Вы успешно сняли со счёта " +money);
             sum -= money;
+            if (sum < 0)
+            {
+                Console.WriteLine("Благодарим вас за использование услуги оведрафт");
+            }
+            Console.WriteLine($"Ваш баланс: {sum}");
         }
 
         public void Obnul() 
@@ -47,15 +51,15 @@ namespace BankMetod
         public void perewod (float money)
         {
             Console.WriteLine($"Вы успешно перевели {money} на другой счёт");
+            if (sum < 0)
+            {
+                Console.WriteLine("Благодарим вас за использование услуги оведрафт");
+            }
 
         }
-
-
-
-
+       
     }
-
-
+    //здесь могла бы быть ваша реклама
 
 
 
